@@ -1,0 +1,20 @@
+# Always exclude live Hermes state and secrets from this public template.
+.env
+.env.*
+!.env.example
+auth.json
+config.yaml
+*.db
+*.db-*
+sessions/
+memories/
+logs/
+cache/
+pairing/
+runtime/
+backups/
+*.lock
+*.pid
+*.sock
+.DS_Store
+__pycache__/
