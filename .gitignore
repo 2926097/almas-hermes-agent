@@ -1,20 +1,51 @@
-# Always exclude live Hermes state and secrets from this public template.
+# Credentials and private configuration
 .env
 .env.*
 !.env.example
+.env.EXAMPLE
 auth.json
+*.pem
+*.key
+mcp.json
 config.yaml
+
+# Hermes user data and runtime state
+memories/
+sessions/
+logs/
+plans/
+workspace/
+home/
+local/
+cron/
+state.db*
+hermes_state.db*
+response_store.db*
+runs_idempotency.db*
+gateway.pid
+gateway_state.json
+processes.json
+auth.lock
+active_profile
+.update_check
+
+# Caches, backups, generated artifacts
+cache/
+*_cache/
+audio_cache/
+image_cache/
+document_cache/
+browser_screenshots/
+backups/
+checkpoints/
+sandboxes/
 *.db
 *.db-*
-sessions/
-memories/
-logs/
-cache/
-pairing/
-runtime/
-backups/
 *.lock
 *.pid
 *.sock
-.DS_Store
+
+# Build and OS artifacts
+node_modules/
 __pycache__/
+.DS_Store

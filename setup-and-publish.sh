@@ -18,8 +18,16 @@ if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git init -b main
 fi
 
+# Refuse any pre-staged path outside the explicit public distribution allowlist.
+allowed_files=(README.md SOUL.md .gitignore publish.sh setup-and-publish.sh distribution.yaml)
+while IFS= read -r -d '' path; do
+  case "$path" in
+    README.md|SOUL.md|.gitignore|publish.sh|setup-and-publish.sh|distribution.yaml) ;;
+    *) printf 'Refusing to publish pre-staged file outside allowlist: %s\n' "$path" >&2; exit 7 ;;
+  esac
+done < <(git diff --cached --name-only -z)
 # Stage only reviewed public-template files; never stage the whole directory.
-git add -- README.md SOUL.md .gitignore publish.sh setup-and-publish.sh
+git add -- "${allowed_files[@]}"
 if git diff --cached --quiet; then
   printf 'No curated files staged for the initial publication.\n' >&2
   exit 4
@@ -33,7 +41,7 @@ printf '\n'
 read -r -p 'Create the PUBLIC GitHub repository almas-hermes-agent and push these files? [y/N] ' answer
 case "$answer" in
   y|Y|yes|YES) ;;
-  *) git reset --quiet -- README.md SOUL.md .gitignore publish.sh setup-and-publish.sh; printf 'Cancelled; no repository created.\n'; exit 0 ;;
+  *) git reset --quiet -- README.md SOUL.md .gitignore publish.sh setup-and-publish.sh distribution.yaml; printf 'Cancelled; no repository created.\n'; exit 0 ;;
 esac
 
 # Refuse to accidentally publish this template to an unrelated existing origin.

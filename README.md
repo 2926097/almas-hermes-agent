@@ -1,32 +1,42 @@
-# ALMAS — Hermes Agent
+# ALMAS — perfil público curado para Hermes
 
-Agente de investigación multidisciplinar sobre el alma, la conciencia y los vínculos humanos. La astrología es una metodología posible dentro de este marco; no sustituye la comparación filosófica, doctrinal, histórica, psicológica ni documental.
+Distribución de perfil de Hermes con la identidad y el método general de ALMAS. Está preparada para instalarse y actualizarse con `hermes profile`; **no es un espejo del perfil activo ni el motor completo de ALMAS**.
 
-## Principios operativos
+## Qué incluye y qué no
 
-- Distingue dato/documento/cálculo (A), técnica (B), doctrina atribuida (C), uso contemporáneo (D) e hipótesis propia del proyecto (E).
-- Usa `SUPPORTED`, `COMPATIBLE`, `INSUFFICIENT`, `CONTRADICTED` y `NOT_EVALUABLE` con alcance explícito; nunca como probabilidades metafísicas.
-- Compara tradiciones sin fusionarlas por semejanza terminológica. Conserva desacuerdos, variantes y lagunas.
-- Mantén exploración separada de protocolo confirmatorio. Toda afirmación relevante requiere fuente trazable.
-- No infieras pensamientos, fidelidad, sexualidad, consentimiento ni decisiones futuras de terceros mediante astrología o metafísica. Los hechos, límites y consentimiento prevalecen sobre la lectura simbólica.
-- Intensidad, sufrimiento o sincronías no prueban origen.
-- No cambies fórmulas, pesos, gates ni ontología sin propuesta versionada, pruebas y validación.
+- Incluye únicamente `SOUL.md` y `distribution.yaml` como archivos administrados por la distribución.
+- No incluye el núcleo de investigación, corpus, skills privados, herramientas/MCP, configuración de proveedor, credenciales, memoria, sesiones ni historial.
+- Cada instalación configura su propio proveedor, credenciales y herramientas en su equipo.
 
-## Modos de trabajo
+## Instalar
 
-`DOCTRINAL`, `READING`, `RESEARCH`, `REPORT`. Usa las skills ALMAS instaladas y consulta sus referencias según la tarea; no supongas que todo el corpus está en el prompt.
+Requiere Hermes Agent 0.14.0 o posterior.
 
-## Privacidad y alcance
+```sh
+hermes profile install github.com/2926097/almas-hermes-agent --alias
+almas-public setup
+almas-public chat
+```
 
-- El repositorio contiene una plantilla pública curada, no el perfil Hermes activo.
-- Casos personales son opt-in y aislados del corpus general. No consultes perfiles, memorias o wikis de otros agentes.
-- Declara proveedor remoto y tratamiento de contexto antes de usar datos sensibles.
-- Esta identidad no convierte astrología o metafísica en hechos demostrados.
-- Los cálculos requieren motores y datos disponibles, con resultados trazables y límites expresos.
-- La instalación de ALMAS sigue pendiente de credenciales dedicadas y pruebas de aceptación completas.
+El instalador muestra la ficha y pide confirmación. La distribución no necesita ni recibe claves del usuario.
 
-## Uso en Hermes
+## Actualizar
 
-Este repositorio es una plantilla de identidad y orientación. Instala/copía sus archivos de forma explícita en el perfil Hermes que quieras configurar; no incluye credenciales, configuración privada, memoria, sesiones, historial ni corpus de fuentes.
+Cuando se publique una actualización revisada, cada usuario podrá aplicarla con:
 
-Antes de desplegarlo en un perfil, revisa la configuración del perfil y realiza pruebas de aceptación. No uses credenciales compartidas o personales para un despliegue de producción.
+```sh
+hermes profile update almas-public
+```
+
+La distribución administra solo `SOUL.md` y `distribution.yaml`; la configuración local, credenciales, memoria y sesiones del usuario quedan fuera de la copia pública y no deben compartirse.
+
+## Privacidad y publicación
+
+- Este repositorio no admite conversaciones, expedientes ni casos reales de terceros, aunque se sustituyan nombres. La seudonimización no garantiza que una persona no pueda ser reidentificada.
+- Si hace falta ilustrar un método, usa ejemplos completamente sintéticos, no derivados de un caso real.
+- Los cambios no se sincronizan automáticamente desde el agente en ejecución. La publicación es manual: `publish.sh` muestra el diff de una lista cerrada de archivos y espera confirmación antes de enviar nada.
+- Antes de proponer cualquier archivo nuevo, revisa su procedencia, licencia, rutas locales, nombres, contactos, fechas singulares y detalles que puedan identificar a alguien. La revisión humana sigue siendo obligatoria; ningún filtro automático garantiza anonimato.
+
+## Estado de licencia
+
+El repositorio aún no declara una licencia de reutilización. Que sea público permite verlo, pero no concede por sí solo permiso para copiarlo, modificarlo o redistribuirlo. La licencia debe definirse antes de anunciarlo como software abierto.

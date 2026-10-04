@@ -10,8 +10,15 @@ if ! git remote get-url origin >/dev/null 2>&1; then
   exit 2
 fi
 
-# Deliberately stage only this public allowlist, never the whole working tree.
-git add -- README.md SOUL.md .gitignore
+# Deliberately stage only the public distribution allowlist; never stage the whole working tree.
+allowed_files=(README.md SOUL.md .gitignore distribution.yaml publish.sh setup-and-publish.sh)
+while IFS= read -r -d '' path; do
+  case "$path" in
+    README.md|SOUL.md|.gitignore|distribution.yaml|publish.sh|setup-and-publish.sh) ;;
+    *) printf 'Refusing to publish pre-staged file outside allowlist: %s\n' "$path" >&2; exit 7 ;;
+  esac
+done < <(git diff --cached --name-only -z)
+git add -- "${allowed_files[@]}"
 if git diff --cached --quiet; then
   printf 'No curated-file changes to publish.\n'
   exit 0
@@ -29,7 +36,7 @@ case "$answer" in
     git push
     ;;
   *)
-    git reset --quiet -- README.md SOUL.md .gitignore
+    git reset --quiet -- README.md SOUL.md .gitignore distribution.yaml publish.sh setup-and-publish.sh
     printf 'Cancelled; nothing published.\n'
     ;;
 esac

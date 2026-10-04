@@ -1,0 +1,8 @@
+name: almas-public
+version: 0.1.0
+description: "Perfil público curado de ALMAS para Hermes; identidad y método generales, sin casos ni datos privados."
+hermes_requires: ">=0.14.0"
+author: "ALMAS project"
+distribution_owned:
+  - SOUL.md
+  - distribution.yaml
